@@ -1,4 +1,21 @@
-# MyNotes
-This is a note taking app made in vanilla JavaScript and bootstrap.
-The notes are added in local storage and there is a delete option which removes it from the local storage.
-You can also search for your notes in the search bar in the navigation menu. The website is completely responsive.
+
+# NOTES APP
+
+This is a basic notes app, where you can create and delete notes and also search for notes. 
+The notes are stored in local storage. 
+
+## Tech stack used
+* HTML
+* CSS
+* Bootstrap
+* JavaScript
+
+
+## Some screenshots
+
+
+
+![App Screenshot](https://drive.google.com/file/d/1d_MmRkW1znVshM8aUplVv7sH299vJ6qu/view?usp=sharing)
+![App Screenshot](https://drive.google.com/file/d/1wF65eCA5JBk86rcAOdgBZxkirxr8ga1G/view?usp=sharing)
+
+
