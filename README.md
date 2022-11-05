@@ -15,7 +15,10 @@ The notes are stored in local storage.
 
 
 
-![App Screenshot](https://drive.google.com/file/d/1d_MmRkW1znVshM8aUplVv7sH299vJ6qu/view?usp=sharing)
-![App Screenshot](https://drive.google.com/file/d/1wF65eCA5JBk86rcAOdgBZxkirxr8ga1G/view?usp=sharing)
+![App Screenshot](https://drive.google.com/uc?export=view&id=1d_MmRkW1znVshM8aUplVv7sH299vJ6qu)
+![App Screenshot](https://drive.google.com/uc?export=view&id=1wF65eCA5JBk86rcAOdgBZxkirxr8ga1G)
+
+
+
 
 
