@@ -22,7 +22,6 @@ The notes are stored in local storage.
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1d_MmRkW1znVshM8aUplVv7sH299vJ6qu)
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1wF65eCA5JBk86rcAOdgBZxkirxr8ga1G)
 
-
 ## CONTRIBUTING TO THIS PROJECT
 
 - Take a look at the Existing Issues of your project and find one that interests you or create your own Issues!
