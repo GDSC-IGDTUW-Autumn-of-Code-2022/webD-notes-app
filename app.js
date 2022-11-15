@@ -56,6 +56,9 @@ function addaNote(){
         alert("Notes cannot be empty");
     }
     showNotes();
+
+    // displaying toast message
+    $(".toast").toast('show')
 }
 
 function deleteNote(index) {
