@@ -92,7 +92,7 @@ function searchtext() {
 }
 
 
-// thene changer function 
+// theme change function 
 
 // function to set a given theme/color-scheme
 function setTheme(themeName) {
