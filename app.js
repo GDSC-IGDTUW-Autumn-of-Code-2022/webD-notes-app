@@ -1,4 +1,12 @@
 //DOM selectors
+
+(function() {
+    
+        setTheme('theme-dark');
+        document.getElementById('slider').checked = false;
+    
+})(); 
+
 showNotes();
 let addbtn= document.getElementById('addBtn');
 let addtext= document.getElementById('addTxt');
@@ -111,12 +119,12 @@ function toggleTheme() {
 }
 
 // Immediately invoked function to set the theme on initial load
-(function () {
+(function() {
     if (localStorage.getItem('theme') === 'theme-dark') {
         setTheme('theme-dark');
         document.getElementById('slider').checked = false;
     } else {
         setTheme('theme-light');
-        document.getElementById('slider').checked = true;
+        document.getElementById('slider').checked = dark;
     }
 })();

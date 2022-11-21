@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-        body{background: linear-gradient(to right, rgb(34, 33, 39),rgb(61, 58, 65))}
+        /* body{background: linear-gradient(to right, rgb(34, 33, 39),rgb(61, 58, 65))} */
 
         .toast{
             color: white;
@@ -26,8 +26,8 @@
 <body>
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Notes</a>
+    <nav class="navbar navbar-expand-lg ">
+        <a class="navbar-brand" href="#" style="color: black;">Notes</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,42 +41,35 @@
                 </li>
 
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            
 
                 <!-- theme switcher -->
-                <div class="container">
-
-                    <label id="switch" class="switch">
-
-                        <input type="checkbox" onchange="toggleTheme()" id="slider">
-                        <span class="slider round"></span>
-
-                        <!-- <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" id="searchTxt" type="search" placeholder="Search" aria-label="Search"> -->
-            </form>
-
+                        <label id="switch" class="switch">
+    
+                            <input type="checkbox" onchange="toggleTheme()" id="slider">
+                            <span class="slider round"></span>Z
         </div>
-        </div>
+        <!-- </div> -->
 
     </nav>
     <!-- navbar -->
 
     <div class="container my-3">
-        <h1 style="color: rgb(134, 153, 237);">Welcome To Notes</h1>
-        <div class="card">
-            <div class="card-body" style="background: rgb(240, 240, 240);">
+        <h1 style="color: rgb(39, 96, 253);">Welcome To Notes</h1>
+        <div class="card" id="cardbg">
+            <div class="card-body" id="cardbg" >
                 <h5 class="card-title">Add a note</h5>
-                <div class="form-group">
+                <div class="form-group" id="cardbg">
                     <textarea class="form-control" id="addTxt" rows="3"></textarea>
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
             </div>
         </div>
-        <h3 style="color: rgb(134, 153, 237); margin-top: 8px;">Your Notes</h3>
+        <h3 style="color: rgb(39, 96, 253); margin-top: 8px;">Your Notes</h3>
         <div id="notes" class="row container-fluid"> </div>
     </div>
-    <h3 style="color: whitesmoke; margin-top: 8px;">Your Notes</h3>
-    <div id="notes" class="row container-fluid"> </div>
+    <!-- <h3 style="color: whitesmoke; margin-top: 8px;">Your Notes</h3>s
+    <div id="notes" class="row container-fluid"> </div> -->
 </div>
 
 
