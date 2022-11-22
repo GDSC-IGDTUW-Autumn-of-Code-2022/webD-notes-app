@@ -59,6 +59,7 @@ function addaNote(){
     notesArray.push(addtext.value);
     localStorage.setItem("notes" , JSON.stringify(notesArray));
     addtext.value="";
+    $(".toast").toast('show');
     }
     else{
         alert("Notes cannot be empty");
@@ -66,7 +67,7 @@ function addaNote(){
     showNotes();
 
     // displaying toast message
-    $(".toast").toast('show')
+    
 }
 
 function deleteNote(index) {

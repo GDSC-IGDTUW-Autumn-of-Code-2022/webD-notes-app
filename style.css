@@ -14,7 +14,7 @@
     --color-accent: #fd6f53;
     --font-color: #f9f9f9;
     --bg-color: rgb(155, 155, 155);
-    --secondary-bg:rgb(255, 255, 255);
+    --secondary-bg:rgb(155, 155, 155);
   }
 
 
@@ -25,6 +25,15 @@
   background: var(--secondary-bg);
 }
 
+.noteCard.my-2.mx-2.card{
+  background: var(--secondary-bg);
+  color: black;
+}
+
+/* #notes{
+  background: var(--secondary-bg);
+} */
+
 #addbtn{
   border: 0px;
 }
@@ -34,7 +43,7 @@
     display: flex;
     width: 100%;
     height: 100%;
-    background: var(--color-secondary);
+    /* background: var(--color-secondary); */
     flex-direction: column;
   }
 
