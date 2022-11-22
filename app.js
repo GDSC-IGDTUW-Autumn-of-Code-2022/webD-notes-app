@@ -1,4 +1,12 @@
 //DOM selectors
+
+(function() {
+    
+        setTheme('theme-dark');
+        document.getElementById('slider').checked = false;
+    
+})(); 
+
 showNotes();
 let addbtn= document.getElementById('addBtn');
 let addtext= document.getElementById('addTxt');
@@ -51,6 +59,7 @@ function addaNote(){
     notesArray.push(addtext.value);
     localStorage.setItem("notes" , JSON.stringify(notesArray));
     addtext.value="";
+    $(".toast").toast('show');
     }
     else{
         alert("Notes cannot be empty");
@@ -58,7 +67,7 @@ function addaNote(){
     showNotes();
 
     // displaying toast message
-    $(".toast").toast('show')
+    
 }
 
 function deleteNote(index) {
@@ -111,12 +120,12 @@ function toggleTheme() {
 }
 
 // Immediately invoked function to set the theme on initial load
-(function () {
+(function() {
     if (localStorage.getItem('theme') === 'theme-dark') {
         setTheme('theme-dark');
         document.getElementById('slider').checked = false;
     } else {
         setTheme('theme-light');
-        document.getElementById('slider').checked = true;
+        document.getElementById('slider').checked = dark;
     }
 })();
