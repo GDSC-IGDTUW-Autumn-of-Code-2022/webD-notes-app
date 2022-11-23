@@ -35,7 +35,7 @@ function showNotes(){
   } else {
     notesElm.innerHTML = `Nothing to show! Use "Add a Note" section to add notes.`;
   }
-  notesElm.style.color="rgb(115, 115, 115)";
+  notesElm.style.color="rgb(0, 0, 0)";
   notesElm.style.fontSize="20px"
 }
 

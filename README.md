@@ -6,7 +6,7 @@
 </p>
 
 This is a notes app, where you can create and delete notes and also search for notes. 
-The notes are stored in local storage. 
+The notes are stored in local storage. One can easily add or delete the notes . 
 
 ## Tech stack used
 * HTML
@@ -16,9 +16,7 @@ The notes are stored in local storage.
 
 
 ## Some screenshots
-
-
-
+![App Screenshot]My_Edited_Screenshots:(https://drive.google.com/file/d/1ocmhhAHUE1g6gOa8-YZ3SiHGYkeswDtS/view?usp=sharing)
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1d_MmRkW1znVshM8aUplVv7sH299vJ6qu)
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1wF65eCA5JBk86rcAOdgBZxkirxr8ga1G)
 
