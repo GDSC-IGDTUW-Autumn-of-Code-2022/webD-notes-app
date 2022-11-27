@@ -86,4 +86,24 @@ function searchtext(){
             }
         })
     }
+(function () {
+    isDarkMode = !(localStorage.getItem("isDarkMode") === "true");
+    toggleDarkMode();
+})();
+function toggleDarkMode() {
+    isDarkMode = !isDarkMode;
+    localStorage.setItem("isDarkMode", isDarkMode);
+    if (isDarkMode) {
+        document.body.className = "dark-mode";
+
+        document.getElementById("toggleDarkModeBtn").innerText = "Light mode";
+
+    } else {
+
+        document.body.className = "light-mode";
+
+        document.getElementById("toggleDarkModeBtn").innerText = "Dark mode";
+    }
+}
+
 
