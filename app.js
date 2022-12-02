@@ -1,122 +1,137 @@
-//DOM selectors
-showNotes();
-let addbtn= document.getElementById('addBtn');
-let addtext= document.getElementById('addTxt');
-let searchTxt= document.getElementById('searchTxt');
+<!DOCTYPE html>
+<html lang="en">
 
-//Event listeners
-addbtn.addEventListener('click', addaNote);
-searchTxt.addEventListener('input', searchtext);
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes app</title>
 
-//Functions
-//let notesArray=[];
-function showNotes(){
-    let notes=localStorage.getItem('notes');
-    if(notes==null){
-        notesArray=[];
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body{background: linear-gradient(to right, rgb(34, 33, 39),rgb(61, 58, 65))}
+
+        .toast{
+            color: white;
+            background: linear-gradient(to right, #B06AB3, #4568DC); 
+        }
+        .fade {
+            transition-duration: 1s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Notes</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+
+                <!-- theme switcher -->
+                <div class="container">
+
+                    <label id="switch" class="switch">
+
+                        <input type="checkbox" onchange="toggleTheme()" id="slider">
+                        <span class="slider round"></span>
+
+                        <!-- <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" id="searchTxt" type="search" placeholder="Search" aria-label="Search"> -->
+            </form>
+
+        </div>
+        </div>
+
+    </nav>
+    <!-- navbar -->
+
+    <div class="container my-3">
+        <h1 style="color: rgb(134, 153, 237);">Welcome To Notes</h1>
+        <div class="card">
+            
+            <div class="card-body" style="background: rgb(240, 240, 240);">
+                <h5 class="card-title">Add a note</h5>
+                <div class="form-group">
+                    <p id="hey"></p>
+                    <textarea class="form-control" id="addTxt" rows="3" name="display">
+                        
+                        
+
+                    </textarea>
+                  
+                    <br>
+                    <button onclick="telldate()" class="btn btn-primary" role="button">Add Date and Time</button>
+                    
+                </div>
+                <button  class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
+            </div>
+
+
+            <!--ADDDING OPTION OF DATE AND TIME  -------------------------------------------------->
+             
+        
+                
+
+            <!-- --------------------------------------------------------------------------------------->
+        </div>
+        <h3 style="color: rgb(134, 153, 237); margin-top: 8px;">Your Notes</h3>
+        <div id="notes" class="row container-fluid"> </div>
+    </div>
+    <h3 style="color: whitesmoke; margin-top: 8px;">Your Notes</h3>
+    <div id="notes" class="row container-fluid"> </div>
+</div>
+
+
+<!-- *** Toast Message *** -->
+  <div id="" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-animation="true" data-autohide="true" data-delay="1000" style="position: absolute; top:405px; right:18px ">
+    <div class="toast-body">
+      <img src="images/check-mark.png" class="rounded mr-2" width="23px">
+      Note Created Successfully!
+    </div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="app.js"></script>
+
+
+<!---                  -->
+
+
+<script>
+    function telldate(){
+	var date = new Date();
+	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+	var date_time = current_date+" "+current_time;	
+    var result = date_time;
+      document.getElementsByName('display')[0].value= result + '\n';
     }
-    else{
-        notesArray=JSON.parse(notes);
-    }
-    let html = '';
-   notesArray.forEach(function(element, index) {
-    html += `
-            <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Note ${index + 1}</h5>
-                        <p class="card-text"> ${element}</p>
-                        <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
-                    </div>
-                </div>`;
-  });
-  let notesElm = document.getElementById("notes");
-  if (notesArray.length != 0) {
-    notesElm.innerHTML = html;
-  } else {
-    notesElm.innerHTML = `Nothing to show! Use "Add a Note" section to add notes.`;
-  }
-  notesElm.style.color="rgb(115, 115, 115)";
-  notesElm.style.fontSize="20px"
-}
+</script>
 
-function addaNote(){
-    let notes=localStorage.getItem('notes');
-    if(notes==null){
-        notesArray=[];
-    }
-    else{
-        notesArray=JSON.parse(notes);
-    }
-    if(addtext.value!==""){
-    notesArray.push(addtext.value);
-    localStorage.setItem("notes" , JSON.stringify(notesArray));
-    addtext.value="";
-    }
-    else{
-        alert("Notes cannot be empty");
-    }
-    showNotes();
+</body>
 
-    // displaying toast message
-    $(".toast").toast('show')
-}
-
-function deleteNote(index) {
-    //   console.log("I am deleting", index);
-    
-      let notes = localStorage.getItem("notes");
-      if (notes == null) {
-        notesObj = [];
-      } else {
-        notesObj = JSON.parse(notes);
-      }
-    
-      notesObj.splice(index, 1);
-      localStorage.setItem("notes", JSON.stringify(notesObj));
-      showNotes();
-    }
-function searchtext(){
-  
-        let inputVal = searchTxt.value;
-        let noteCards = document.getElementsByClassName('noteCard');
-        Array.from(noteCards).forEach(function(element){
-            let cardTxt = element.getElementsByTagName("p")[0].innerText;
-            if(cardTxt.includes(inputVal)){
-                element.style.display = "block";
-            }
-            else{
-                element.style.display = "none";
-            }
-        })
-    }
-
-
-
-
-// theme change function 
-
-// function to set a given theme/color-scheme
-function setTheme(themeName) {
-    localStorage.setItem('theme', themeName);
-    document.documentElement.className = themeName;
-}
-
-// function to toggle between light and dark theme
-function toggleTheme() {
-    if (localStorage.getItem('theme') === 'theme-dark') {
-        setTheme('theme-light');
-    } else {
-        setTheme('theme-dark');
-    }
-}
-
-// Immediately invoked function to set the theme on initial load
-(function () {
-    if (localStorage.getItem('theme') === 'theme-dark') {
-        setTheme('theme-dark');
-        document.getElementById('slider').checked = false;
-    } else {
-        setTheme('theme-light');
-        document.getElementById('slider').checked = true;
-    }
-})();
+</html>
