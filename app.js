@@ -1,9 +1,10 @@
 //DOM selectors
 showNotes();
 let addbtn = document.getElementById("addBtn");
+let done = document.getElementById("editBtn");
 let addtext = document.getElementById("addTxt");
 let searchTxt = document.getElementById("searchTxt");
-
+done.style.visibility="hidden";
 //Event listeners
 addbtn.addEventListener("click", addaNote);
 searchTxt.addEventListener("input", searchtext);
@@ -24,6 +25,7 @@ function showNotes() {
                     <div class="card-body">
                         <h5 class="card-title">Note ${index + 1}</h5>
                         <p class="card-text"> ${element}</p>
+                        <button id="${index}" onclick="editNote(this.id)" class="btn btn-primary">Edit</button>
                         <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
                     </div>
                 </div>`;
@@ -58,6 +60,37 @@ function addaNote() {
 
   // displaying toast message
   $(".toast").toast("show");
+}
+
+function editNote(index){
+            addbtn.style.visibility="collapse";
+            done.style.visibility="visible";
+            let notes = localStorage.getItem("notes");
+            if (notes == null) {
+              notesObj = [];
+            } else {
+              notesObj = JSON.parse(notes);
+            }
+            addtext.value=notesObj[index];
+            done.onclick=()=>{
+              const update=addtext.value;
+              if(update.length>0){
+              notesObj.splice(index,1,update);
+              localStorage.setItem("notes", JSON.stringify(notesObj));
+              showNotes();
+              addtext.value="";
+              addbtn.style.visibility="visible";
+              done.style.visibility="hidden";
+              
+              
+          }
+              else{
+                   window.alert("Can not be empty,Your item will get delted.");
+                   notesObj.splice(index,1);
+                   localStorage.setItem("notes", JSON.stringify(notesObj));
+                   showNotes();
+              }
+           }
 }
 
 function deleteNote(index) {
