@@ -6,7 +6,7 @@ let searchTxt= document.getElementById('searchTxt');
 
 //Event listeners
 addbtn.addEventListener('click', addaNote);
-// searchTxt.addEventListener('input', searchtext); This field was disabled in html previously and was causing Error
+searchTxt.addEventListener('input', searchtext)
 
 //Functions
 //let notesArray=[];
