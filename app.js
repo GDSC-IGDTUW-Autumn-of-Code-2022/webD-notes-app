@@ -51,13 +51,10 @@ function addaNote(){
     }
     let dateAndTimeField="";
     if(dateTimeToggle.checked===true){
-        dateAndTimeField = new Date().toLocaleString('en-us', {
-            year: 'numeric',
-            month: 'short',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-          })
+        let date = new Date();
+  	    let dateValue = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+	    let TimeValue = date.getHours()+":"+date.getMinutes();
+        dateAndTimeField=`${dateValue}, ${TimeValue}`
     }
     if(addtext.value!==""){
     let udpatedNote={
