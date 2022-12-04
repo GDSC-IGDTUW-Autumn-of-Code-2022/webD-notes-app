@@ -6,7 +6,7 @@ let searchTxt= document.getElementById('searchTxt');
 
 //Event listeners
 addbtn.addEventListener('click', addaNote);
-searchTxt.addEventListener('input', searchtext);
+// searchTxt.addEventListener('input', searchtext); This field was disabled in html previously and was causing Error
 
 //Functions
 //let notesArray=[];
@@ -24,7 +24,8 @@ function showNotes(){
             <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Note ${index + 1}</h5>
-                        <p class="card-text"> ${element}</p>
+                        <p class="card-text"> ${element.text}</p>
+                        <p id="card-subtext">${element.dateTime}</p>
                         <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
                     </div>
                 </div>`;
@@ -41,14 +42,29 @@ function showNotes(){
 
 function addaNote(){
     let notes=localStorage.getItem('notes');
+    let dateTimeToggle = document.getElementById('date-toggle')
     if(notes==null){
         notesArray=[];
     }
     else{
         notesArray=JSON.parse(notes);
     }
+    let dateAndTimeField="";
+    if(dateTimeToggle.checked===true){
+        dateAndTimeField = new Date().toLocaleString('en-us', {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+          })
+    }
     if(addtext.value!==""){
-    notesArray.push(addtext.value);
+    let udpatedNote={
+        text:addtext.value,
+        dateTime:`${dateAndTimeField}`,
+    }
+    notesArray.push(udpatedNote);
     localStorage.setItem("notes" , JSON.stringify(notesArray));
     addtext.value="";
     }
