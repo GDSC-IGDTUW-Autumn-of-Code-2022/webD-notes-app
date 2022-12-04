@@ -45,20 +45,16 @@ function addaNote(){
   const audio = document.querySelector(".sound");
   audio.play();
   let notes=localStorage.getItem('notes');
-  let dateTimeToggle = document.getElementById('date-toggle')
   if(notes==null){
       notesArray=[];
   }
   else{
       notesArray=JSON.parse(notes);
   }
-  let dateAndTimeField="";
-  if(dateTimeToggle.checked===true){
-      let date = new Date();
-      let dateValue = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+    let date = new Date();
+    let dateValue = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
     let TimeValue = date.getHours()+":"+date.getMinutes();
-      dateAndTimeField=`${dateValue}, ${TimeValue}`
-  }
+    let dateAndTimeField=`${dateValue}, ${TimeValue}`
   if(addtext.value!==""){
   let udpatedNote={
       text:addtext.value,
@@ -85,10 +81,17 @@ function editNote(index){
             } else {
               notesObj = JSON.parse(notes);
             }
-            addtext.value=notesObj[index];
+            addtext.value=notesObj[index].text;
+            let date = new Date();
+            let dateValue = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+            let TimeValue = date.getHours()+":"+date.getMinutes();
+            let dateAndTimeField=`${dateValue}, ${TimeValue}`
             done.onclick=()=>{
-              const update=addtext.value;
-              if(update.length>0){
+              const update={
+                text:addtext.value,
+                dateTime:dateAndTimeField,
+              };
+              if(update.text.length>0){
               notesObj.splice(index,1,update);
               localStorage.setItem("notes", JSON.stringify(notesObj));
               showNotes();
