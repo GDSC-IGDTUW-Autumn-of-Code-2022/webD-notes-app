@@ -109,4 +109,17 @@ body {
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .card-action-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #card-subtext {
+    font-size: 0.6em;
+    color: #000000;
+    font-weight: 600;
+    margin: 8px 0;
+  }
   

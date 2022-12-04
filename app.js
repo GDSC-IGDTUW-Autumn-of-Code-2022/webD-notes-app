@@ -24,7 +24,8 @@ function showNotes() {
             <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Note ${index + 1}</h5>
-                        <p class="card-text"> ${element}</p>
+                        <p class="card-text"> ${element.text}</p>
+                        <p id="card-subtext">${element.dateTime}</p>
                         <button id="${index}" onclick="editNote(this.id)" class="btn btn-primary">Edit</button>
                         <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
                     </div>
@@ -40,24 +41,33 @@ function showNotes() {
   notesElm.style.fontSize = "20px";
 }
 
-function addaNote() {
+function addaNote(){
   const audio = document.querySelector(".sound");
   audio.play();
-  let notes = localStorage.getItem("notes");
-  if (notes == null) {
-    notesArray = [];
-  } else {
-    notesArray = JSON.parse(notes);
+  let notes=localStorage.getItem('notes');
+  if(notes==null){
+      notesArray=[];
   }
-  if (addtext.value !== "") {
-    notesArray.push(addtext.value);
-    localStorage.setItem("notes", JSON.stringify(notesArray));
-    addtext.value = "";
-  } else {
-    alert("Notes cannot be empty");
+  else{
+      notesArray=JSON.parse(notes);
+  }
+    let date = new Date();
+    let dateValue = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+    let TimeValue = date.getHours()+":"+date.getMinutes();
+    let dateAndTimeField=`${dateValue}, ${TimeValue}`
+  if(addtext.value!==""){
+  let udpatedNote={
+      text:addtext.value,
+      dateTime:`${dateAndTimeField}`,
+  }
+  notesArray.push(udpatedNote);
+  localStorage.setItem("notes" , JSON.stringify(notesArray));
+  addtext.value="";
+  }
+  else{
+      alert("Notes cannot be empty");
   }
   showNotes();
-
   // displaying toast message
   $(".toast").toast("show");
 }
@@ -71,10 +81,17 @@ function editNote(index){
             } else {
               notesObj = JSON.parse(notes);
             }
-            addtext.value=notesObj[index];
+            addtext.value=notesObj[index].text;
+            let date = new Date();
+            let dateValue = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+            let TimeValue = date.getHours()+":"+date.getMinutes();
+            let dateAndTimeField=`${dateValue}, ${TimeValue}`
             done.onclick=()=>{
-              const update=addtext.value;
-              if(update.length>0){
+              const update={
+                text:addtext.value,
+                dateTime:dateAndTimeField,
+              };
+              if(update.text.length>0){
               notesObj.splice(index,1,update);
               localStorage.setItem("notes", JSON.stringify(notesObj));
               showNotes();
