@@ -1,31 +1,32 @@
 //DOM selectors
 showNotes();
-let addbtn= document.getElementById('addBtn');
-let addtext= document.getElementById('addTxt');
-let searchTxt= document.getElementById('searchTxt');
-
+let addbtn = document.getElementById("addBtn");
+let done = document.getElementById("editBtn");
+let addtext = document.getElementById("addTxt");
+let searchTxt = document.getElementById("searchTxt");
+done.style.visibility="hidden";
 //Event listeners
-addbtn.addEventListener('click', addaNote);
-searchTxt.addEventListener('input', searchtext);
+addbtn.addEventListener("click", addaNote);
+searchTxt.addEventListener("input", searchtext);
 
 //Functions
 //let notesArray=[];
-function showNotes(){
-    let notes=localStorage.getItem('notes');
-    if(notes==null){
-        notesArray=[];
-    }
-    else{
-        notesArray=JSON.parse(notes);
-    }
-    let html = '';
-   notesArray.forEach(function(element, index) {
+function showNotes() {
+  let notes = localStorage.getItem("notes");
+  if (notes == null) {
+    notesArray = [];
+  } else {
+    notesArray = JSON.parse(notes);
+  }
+  let html = "";
+  notesArray.forEach(function (element, index) {
     html += `
             <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Note ${index + 1}</h5>
                         <p class="card-text"> ${element.text}</p>
                         <p id="card-subtext">${element.dateTime}</p>
+                        <button id="${index}" onclick="editNote(this.id)" class="btn btn-primary">Edit</button>
                         <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
                     </div>
                 </div>`;
@@ -36,100 +37,127 @@ function showNotes(){
   } else {
     notesElm.innerHTML = `Nothing to show! Use "Add a Note" section to add notes.`;
   }
-  notesElm.style.color="rgb(115, 115, 115)";
-  notesElm.style.fontSize="20px"
+  notesElm.style.color = "rgb(115, 115, 115)";
+  notesElm.style.fontSize = "20px";
 }
 
 function addaNote(){
-    let notes=localStorage.getItem('notes');
-    let dateTimeToggle = document.getElementById('date-toggle')
-    if(notes==null){
-        notesArray=[];
-    }
-    else{
-        notesArray=JSON.parse(notes);
-    }
-    let dateAndTimeField="";
-    if(dateTimeToggle.checked===true){
-        let date = new Date();
-  	    let dateValue = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
-	    let TimeValue = date.getHours()+":"+date.getMinutes();
-        dateAndTimeField=`${dateValue}, ${TimeValue}`
-    }
-    if(addtext.value!==""){
-    let udpatedNote={
-        text:addtext.value,
-        dateTime:`${dateAndTimeField}`,
-    }
-    notesArray.push(udpatedNote);
-    localStorage.setItem("notes" , JSON.stringify(notesArray));
-    addtext.value="";
-    }
-    else{
-        alert("Notes cannot be empty");
-    }
-    showNotes();
+  const audio = document.querySelector(".sound");
+  audio.play();
+  let notes=localStorage.getItem('notes');
+  let dateTimeToggle = document.getElementById('date-toggle')
+  if(notes==null){
+      notesArray=[];
+  }
+  else{
+      notesArray=JSON.parse(notes);
+  }
+  let dateAndTimeField="";
+  if(dateTimeToggle.checked===true){
+      let date = new Date();
+      let dateValue = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+    let TimeValue = date.getHours()+":"+date.getMinutes();
+      dateAndTimeField=`${dateValue}, ${TimeValue}`
+  }
+  if(addtext.value!==""){
+  let udpatedNote={
+      text:addtext.value,
+      dateTime:`${dateAndTimeField}`,
+  }
+  notesArray.push(udpatedNote);
+  localStorage.setItem("notes" , JSON.stringify(notesArray));
+  addtext.value="";
+  }
+  else{
+      alert("Notes cannot be empty");
+  }
+  showNotes();
+  // displaying toast message
+  $(".toast").toast("show");
+}
 
-    // displaying toast message
-    $(".toast").toast('show')
+function editNote(index){
+            addbtn.style.visibility="collapse";
+            done.style.visibility="visible";
+            let notes = localStorage.getItem("notes");
+            if (notes == null) {
+              notesObj = [];
+            } else {
+              notesObj = JSON.parse(notes);
+            }
+            addtext.value=notesObj[index];
+            done.onclick=()=>{
+              const update=addtext.value;
+              if(update.length>0){
+              notesObj.splice(index,1,update);
+              localStorage.setItem("notes", JSON.stringify(notesObj));
+              showNotes();
+              addtext.value="";
+              addbtn.style.visibility="visible";
+              done.style.visibility="hidden";
+              
+              
+          }
+              else{
+                   window.alert("Can not be empty,Your item will get delted.");
+                   notesObj.splice(index,1);
+                   localStorage.setItem("notes", JSON.stringify(notesObj));
+                   showNotes();
+              }
+           }
 }
 
 function deleteNote(index) {
-    //   console.log("I am deleting", index);
-    
-      let notes = localStorage.getItem("notes");
-      if (notes == null) {
-        notesObj = [];
-      } else {
-        notesObj = JSON.parse(notes);
-      }
-    
-      notesObj.splice(index, 1);
-      localStorage.setItem("notes", JSON.stringify(notesObj));
-      showNotes();
+  //   console.log("I am deleting", index);
+
+  let notes = localStorage.getItem("notes");
+  if (notes == null) {
+    notesObj = [];
+  } else {
+    notesObj = JSON.parse(notes);
+  }
+
+  notesObj.splice(index, 1);
+  localStorage.setItem("notes", JSON.stringify(notesObj));
+  showNotes();
+}
+function searchtext() {
+  let inputVal = searchTxt.value;
+  let noteCards = document.getElementsByClassName("noteCard");
+  Array.from(noteCards).forEach(function (element) {
+    let cardTxt = element.getElementsByTagName("p")[0].innerText;
+    if (cardTxt.includes(inputVal)) {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
     }
-function searchtext(){
-  
-        let inputVal = searchTxt.value;
-        let noteCards = document.getElementsByClassName('noteCard');
-        Array.from(noteCards).forEach(function(element){
-            let cardTxt = element.getElementsByTagName("p")[0].innerText;
-            if(cardTxt.includes(inputVal)){
-                element.style.display = "block";
-            }
-            else{
-                element.style.display = "none";
-            }
-        })
-    }
+  });
+}
 
-
-
-
-// theme change function 
+// theme change function
 
 // function to set a given theme/color-scheme
 function setTheme(themeName) {
-    localStorage.setItem('theme', themeName);
-    document.documentElement.className = themeName;
+  localStorage.setItem("theme", themeName);
+  document.documentElement.className = themeName;
 }
 
 // function to toggle between light and dark theme
 function toggleTheme() {
-    if (localStorage.getItem('theme') === 'theme-dark') {
-        setTheme('theme-light');
-    } else {
-        setTheme('theme-dark');
-    }
+  if (localStorage.getItem("theme") === "theme-dark") {
+    setTheme("theme-light");
+  } else {
+    setTheme("theme-dark");
+  }
 }
 
 // Immediately invoked function to set the theme on initial load
 (function () {
-    if (localStorage.getItem('theme') === 'theme-dark') {
-        setTheme('theme-dark');
-        document.getElementById('slider').checked = false;
-    } else {
-        setTheme('theme-light');
-        document.getElementById('slider').checked = true;
-    }
+  if (localStorage.getItem("theme") === "theme-dark") {
+    setTheme("theme-dark");
+    document.getElementById("slider").checked = false;
+  } else {
+    setTheme("theme-light");
+    document.getElementById("slider").checked = true;
+  }
 })();
