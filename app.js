@@ -4,13 +4,14 @@ let addbtn = document.getElementById("addBtn");
 let done = document.getElementById("editBtn");
 let addtext = document.getElementById("addTxt");
 let searchTxt = document.getElementById("searchTxt");
+let heading = document.getElementById("heading");
 done.style.visibility="hidden";
 //Event listeners
 addbtn.addEventListener("click", addaNote);
 searchTxt.addEventListener("input", searchtext);
 
 //Functions
-//let notesArray=[];
+// let notesArray=[]
 function showNotes() {
   let notes = localStorage.getItem("notes");
   if (notes == null) {
@@ -20,11 +21,12 @@ function showNotes() {
   }
   let html = "";
   notesArray.forEach(function (element, index) {
+    console.log
     html += `
             <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Note ${index + 1}</h5>
-                        <p class="card-text"> ${element}</p>
+                        <h5 class="card-title">${element[0]}</h5>
+                        <p class="card-text"> ${element[1]}</p>
                         <button id="${index}" onclick="editNote(this.id)" class="btn btn-primary">Edit</button>
                         <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete</button>
                     </div>
@@ -50,9 +52,10 @@ function addaNote() {
     notesArray = JSON.parse(notes);
   }
   if (addtext.value !== "") {
-    notesArray.push(addtext.value);
+    notesArray.push([heading.value,addtext.value]);
     localStorage.setItem("notes", JSON.stringify(notesArray));
     addtext.value = "";
+    heading.value="";  
   } else {
     alert("Notes cannot be empty");
   }
@@ -71,13 +74,15 @@ function editNote(index){
             } else {
               notesObj = JSON.parse(notes);
             }
-            addtext.value=notesObj[index];
+            heading.value=notesObj[index][0];
+            addtext.value=notesObj[index][1];
             done.onclick=()=>{
-              const update=addtext.value;
+              const update=[heading.value,addtext.value];
               if(update.length>0){
               notesObj.splice(index,1,update);
               localStorage.setItem("notes", JSON.stringify(notesObj));
               showNotes();
+              heading.value="";
               addtext.value="";
               addbtn.style.visibility="visible";
               done.style.visibility="hidden";
