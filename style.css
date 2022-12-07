@@ -109,4 +109,9 @@ body {
   .slider.round:before {
     border-radius: 50%;
   }
-  
+  .blue-mute {
+    color: #637cf3;
+    font-size: 40px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
