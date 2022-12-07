@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to right, rgb(34, 33, 39), rgb(61, 58, 65))
+    background:var(--color-secondary);
 }
 
 
@@ -31,7 +31,7 @@ body {
   }
   .container button {
     color: var(--font-color);
-    background: var(--color-primary);
+    background: #2196f3;
     padding: 10px 20px;
     /* border: 0; */
    
@@ -79,7 +79,7 @@ body {
     -webkit-transition: 0.4s;
     transition: 0.4s;
     box-shadow: 0 0px 15px #2020203d;
-    background: white url('https://i.ibb.co/FxzBYR9/night.png');
+    background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
     background-repeat: no-repeat;
     background-position: center;
   }
@@ -96,7 +96,7 @@ body {
     -webkit-transform: translateX(24px);
     -ms-transform: translateX(24px);
     transform: translateX(24px);
-    background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
+    background: white url('https://i.ibb.co/FxzBYR9/night.png');
     background-repeat: no-repeat;
     background-position: center;
   }
