@@ -125,7 +125,7 @@ function searchtext() {
   });
 }
 
-// theme change function
+// theme change function for light theme and dark theme -------------------------------------
 
 // function to set a given theme/color-scheme
 function setTheme(themeName) {
