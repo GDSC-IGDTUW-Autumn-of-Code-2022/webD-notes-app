@@ -99,7 +99,58 @@ function editNote(index){
 }
 
 function deleteNote(index) {
+
+    //   console.log("I am deleting", index);
+    
+      let notes = localStorage.getItem("notes");
+      if (notes == null) {
+        notesObj = [];
+      } else {
+        notesObj = JSON.parse(notes);
+      }
+    
+      notesObj.splice(index, 1);
+      localStorage.setItem("notes", JSON.stringify(notesObj));
+      showNotes();
+    }
+function searchtext(){
+  
+        let inputVal = searchTxt.value;
+        let noteCards = document.getElementsByClassName('noteCard');
+        Array.from(noteCards).forEach(function(element){
+            let cardTxt = element.getElementsByTagName("p")[0].innerText;
+            if(cardTxt.includes(inputVal)){
+                element.style.display = "block";
+            }
+            else{
+                element.style.display = "none";
+            }
+        })
+    }
+(function () {
+    isDarkMode = !(localStorage.getItem("isDarkMode") === "true");
+    toggleDarkMode();
+})();
+function toggleDarkMode() {
+    isDarkMode = !isDarkMode;
+    localStorage.setItem("isDarkMode", isDarkMode);
+    if (isDarkMode) {
+        document.body.className = "dark-mode";
+
+        document.getElementById("toggleDarkModeBtn").innerText = "Light mode";
+
+    } else {
+
+        document.body.className = "light-mode";
+
+        document.getElementById("toggleDarkModeBtn").innerText = "Dark mode";
+    }
+}
+
+
+
   //   console.log("I am deleting", index);
+
 
   let notes = localStorage.getItem("notes");
   if (notes == null) {

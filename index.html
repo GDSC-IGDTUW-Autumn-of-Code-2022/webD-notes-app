@@ -10,24 +10,53 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        body{background: linear-gradient(to right, rgb(34, 33, 39),rgb(61, 58, 65))}
 
-        .toast{
-            color: white;
-            background: linear-gradient(to right, #B06AB3, #4568DC); 
-        }
-        .fade {
-            transition-duration: 1s;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body onload="showNotes()" class="light-mode">
+    <div id="msgbox" class="msg">message</div>
+<body>
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand navbar-customizable-logo" href="/">
+      <img style="height: 20px;" class="svg" src="https://res.cloudinary.com/startup-grind/image/upload/dpr_2.0,fl_sanitize/v1/gcs/platform-data-dsc/contentbuilder/logo_dark_horizontal_097s7oa.svg" alt="Google Developer Student Clubs logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" id="searchTxt" type="search" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
+    
+    <!-- <button id="toggleDarkModeBtn" onclick="toggleDarkMode()">Dark mode</button> -->
+    <button
+    class="light-mode-button"
+    aria-label="Toggle Light Mode"
+    onclick="toggle_light_mode()"
+   >
+    <span></span><span></span>
+    </button>
+
+</nav>
+
+  
+    
 </head>
 
 <body>
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Notes</a>
+ 
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,17 +72,7 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
 
-                <!-- theme switcher -->
-                <div class="container">
-
-                    <label id="switch" class="switch">
-
-                        <input type="checkbox" onchange="toggleTheme()" id="slider">
-                        <span class="slider round"></span>
-
-                        <!-- <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" id="searchTxt" type="search" placeholder="Search" aria-label="Search"> -->
-            </form>
+             
 
         </div>
         </div>
@@ -61,25 +80,34 @@
     </nav>
     <!-- navbar -->
 
-    <div class="container my-3">
-        <h1 style="color: rgb(134, 153, 237);">Welcome To Notes</h1>
+    <div class="container ">
+        <h1 style="color: rgba(166, 151, 239, 0.905);">Welcome To Notes</h1>
         <div class="card">
+
+            <div class="card-body" style="background: rgba(10, 10, 10, 0.301);">
+                <h5 class="card-title">Add a note</h5>
+
             <div class="card-body" style="background: rgb(240, 240, 240);">
                 <h5 class="card-title">Add a note
                     <audio src="sounds/mixkit-tile-game-reveal-960.wav" class="sound"></audio>
                 </h5>
+
                 <div class="form-group">
                     <textarea class="form-control" id="heading" rows="1" placeholder="Title"></textarea> <br>
                     <textarea class="form-control" id="addTxt" rows="3" placeholder="Note"></textarea>
                 </div>
                 <button class="btn btn-primary" id="addBtn" style="margin-top: 7px;">Add Note</button>
+
                 <button class="btn btn-primary" id="editBtn" style="margin-top: 7px;">DONE</button>
+
             </div>
         </div>
-        <h3 style="color: rgb(134, 153, 237); margin-top: 8px;">Your Notes</h3>
+        <h3 style="color: rgba(166, 151, 239, 0.905);" >Your Notes</h3>
         <div id="notes" class="row container-fluid"> </div>
     </div>
+
 </div>
+
 
 
 <!-- *** Toast Message *** -->
@@ -89,6 +117,7 @@
       Note Created Successfully!
     </div>
   </div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -102,5 +131,42 @@
 <script src="app.js"></script>
 
 </body>
+
+<script src="index.js"></script>
+  <script>
+    function toggle_light_mode(firstLoad) {
+      var app = document.getElementsByTagName('BODY')[0];
+      const check = firstLoad
+        ? localStorage.lightMode != 'dark'
+        : localStorage.lightMode == 'dark';
+      if (check) {
+        localStorage.lightMode = 'light';
+        app.setAttribute('light-mode', 'light');
+        if (!firstLoad) showmsg('Light Mode Enabled.');
+      } else {
+        localStorage.lightMode = 'dark';
+        app.setAttribute('light-mode', 'dark');
+        if (!firstLoad) showmsg('Dark Mode Enabled.');
+      }
+    }
+
+    var maggio = document.querySelector('#msgbox');
+    function showmsg(txt) {
+      document.getElementById('msgbox').innerText = '✉ ' + txt;
+      maggio.classList.add('show');
+      setTimeout(function () {
+        maggio.classList.remove('show');
+      }, 3000);
+    }
+    document.onreadystatechange = () => {
+      if (document.readyState === 'complete') {
+        console.log('Flipped!');
+        toggle_light_mode({});
+      }
+    };
+  </script>
+
+</html>
+
 
 </html>
