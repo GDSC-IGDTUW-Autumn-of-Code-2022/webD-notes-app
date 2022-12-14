@@ -5,6 +5,7 @@ let done = document.getElementById("editBtn");
 let addtext = document.getElementById("addTxt");
 let searchTxt = document.getElementById("searchTxt");
 let heading = document.getElementById("heading");
+let volumeButton = document.getElementById('mute-button');
 done.style.visibility="hidden";
 //Event listeners
 addbtn.addEventListener("click", addaNote);
@@ -44,7 +45,9 @@ function showNotes() {
 
 function addaNote() {
   const audio = document.querySelector(".sound");
-  audio.play();
+  if (volumeButton.classList.contains('fa-volume-up')) {
+    audio.play();
+  }
   let notes = localStorage.getItem("notes");
   if (notes == null) {
     notesArray = [];
@@ -152,3 +155,14 @@ function toggleTheme() {
     document.getElementById("slider").checked = true;
   }
 })();
+
+function toggleMute() {
+  if (volumeButton.classList.contains('fa-volume-mute')) {
+    volumeButton.classList.remove('fa-volume-mute');
+    volumeButton.classList.add('fa-volume-up');
+  }
+  else {
+    volumeButton.classList.remove('fa-volume-up');
+    volumeButton.classList.add('fa-volume-mute');
+  }
+}
